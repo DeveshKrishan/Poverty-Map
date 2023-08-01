@@ -37,7 +37,15 @@ export default function Main() {
         {/* Map parameters */}
         <div class="grid-item">
           <div className="map-parameters">
-            @param
+
+            <div className='param-2'>
+              <label for="language">Select type of data:</label>
+                <select name="language" id="language">
+                  <option value="javascript" selected>Poverty Rate</option>
+                  <option value="python">Annual Income</option>
+                </select>
+            </div>
+
             <div className="param-1">
               <input
               type="range"
@@ -49,7 +57,12 @@ export default function Main() {
               <p>{year}</p>
             </div>
           
+
+
           </div>
+
+
+          
         </div>
         <div class="grid-item"></div>
 
