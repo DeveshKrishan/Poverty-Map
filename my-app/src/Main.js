@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
+import MapChart from './MapChart';
 
 export default function Main() {
+
+  const options = [
+    {
+      label: "Poverty Rate",
+      value: "povRate",
+    },
+    {
+      label: "Annual Income",
+      value: "annIncome",
+    },
+  ];
+
   const [year, setYear] = useState(1997); // default parameter
   
   const handleSliderChange = (event) => {
     setYear(parseInt(event.target.value));
   };
+
+  const [topic, setTopic] = useState("Poverty Map");
   
+  const handleTopicChange = (e) => {
+    setTopic(e.target.label);
+  };
+
+
   return (
     <div className="main">
       <div class="grid-container">
@@ -25,7 +45,7 @@ export default function Main() {
         {/* MAP */}
         <div class="grid-item long">
           <div className="map">
-            MAP
+            <MapChart year={year} topic={topic} />
           </div>
         </div>
         {/* MAP INFO */}
@@ -38,11 +58,11 @@ export default function Main() {
         <div class="grid-item">
           <div className="map-parameters">
 
-            <div className='param-2'>
+          <div className='param-2'>
               <label for="language">Select type of data:</label>
-                <select name="language" id="language">
-                  <option value="javascript" selected>Poverty Rate</option>
-                  <option value="python">Annual Income</option>
+                <select name="language" id="language" onChange={handleTopicChange}>
+                  <option value="povRate" >Poverty Rate</option>
+                  <option value="annIncome">Annual Income</option>
                 </select>
             </div>
 
