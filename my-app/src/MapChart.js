@@ -2,73 +2,72 @@ import React, { useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { scaleQuantile } from "d3-scale";
 import { csv } from "d3-fetch";
-import * as d3 from "d3";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 
-const MapChart = (props) => {
-  const [data, setData] = useState([]);
-  const year = props.year;
-  const topic = props.topic;
-
-const arr = []
-
-const topicConversion =  new Map();
-topicConversion.set("Povery Rate", "Rate Estimate");
-topicConversion.set("Annual Income", "Median Household Income");
+const topicConversion = new Map();
+topicConversion.set("povRate", "Rate Estimate");
+topicConversion.set("annIncome", "Median Household Income");
 topicConversion.set("Population", "Count Estimate");
 
-console.log(year, topic)
-  // d3.csv("/data.csv", function(data){
-  //   if (data.Year == year)
-  //         arr.push({
-  //           "County" : data.County, 
-  //           "Year" : data.Year,
-  //           "Topic" : eval(`data.${topicConversion.get(topic)}`)
-  //         })
-  // });
+const MapChart = (props) => {
+  const [data, setData] = useState([]);
+  const year = parseInt(props.year);
+  const topic = props.topic;
 
-  // console.log(arr)
+  const geoNameMapping = {}; // Mapping object to associate GeoJSON feature names with data
 
   useEffect(() => {
-    // https://www.bls.gov/lau/
-    csv("/unemployment-by-county-2017.csv").then(counties => {
-      setData(counties);
+    // Load data from CSV
+    csv("/data.csv").then(csvData => {
+      const filteredData = csvData
+        .filter(item => parseInt(item.Year) === year)
+        .map(item => {
+          const name = item.County;
+          geoNameMapping[name] = item.Id;
+          return {
+            name,
+            County: item.County,
+            Year: parseInt(item.Year),
+            Topic: parseFloat(item[topicConversion.get(topic)])
+          };
+        });
+      setData(filteredData);
     });
-  }, []);
+  }, [year, topic]);
 
   const colorScale = scaleQuantile()
-    .domain(data.map(d => d.unemployment_rate))
+    .domain(data.map(d => d.Topic))
     .range([
-      "#ffedea",
-      "#ffcec5",
-      "#ffad9f",
-      "#ff8a75",
-      "#ff5533",
-      "#e2492d",
-      "#be3d26",
-      "#9a311f",
-      "#782618"
+      "#CFECF8",
+      "#B3E9FF",
+      "#82DBFF",
+      "#69D4FF",
+      "#2EADE0",
+      "#1896C8",
+      "#0784B6",
+      "#0775A1",
+      "#005E84"
     ]);
 
   return (
     <>
-        <ComposableMap projection="geoAlbersUsa">
+      <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={geoUrl}>
-            {({ geographies }) =>
+          {({ geographies }) =>
             geographies.map(geo => {
-                const cur = data.find(s => s.id === geo.id);
-                return (
+              const cur = data.find(s => s.name.replace(" County", "") === geo.properties.name);
+              return (
                 <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={cur ? colorScale(cur.unemployment_rate) : "#EEE"}
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill={cur ? colorScale(cur.Topic) : "#EEE"}
                 />
-                );
+              );
             })
-            }
+          }
         </Geographies>
-        </ComposableMap>
+      </ComposableMap>
     </>
   );
 };

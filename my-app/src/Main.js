@@ -20,10 +20,10 @@ export default function Main() {
     setYear(parseInt(event.target.value));
   };
 
-  const [topic, setTopic] = useState("Poverty Map");
+  const [topic, setTopic] = useState("povRate");
   
   const handleTopicChange = (e) => {
-    setTopic(e.target.label);
+    setTopic(e.target.value);
   };
 
 
@@ -55,30 +55,30 @@ export default function Main() {
           </div>
         </div>
         {/* Map parameters */}
-        <div class="grid-item">
+        <div class="grid-item" id='mapParam'>
           <div className="map-parameters">
 
-          <div className='param-2'>
-              <label for="language">Select type of data:</label>
-                <select name="language" id="language" onChange={handleTopicChange}>
-                  <option value="povRate" >Poverty Rate</option>
-                  <option value="annIncome">Annual Income</option>
-                </select>
-            </div>
-
-            <div className="param-1">
-              <input
-              type="range"
-              min="1997"
-              max="2023"
-              value={year}
-              onChange={handleSliderChange}
-              />
-              <p>{year}</p>
-            </div>
           
+            <div className='param-2'>
+                <label for="language">Select type of data:</label>
+                  <select name="language" id="language" onChange={handleTopicChange}>
+                    <option value="povRate" >Poverty Rate</option>
+                    <option value="annIncome">Annual Income</option>
+                  </select>
+              </div>
 
-
+              <div className="param-1">
+                <p>Select Year:</p>
+                <input
+                type="range"
+                min="1997"
+                max="2023"
+                value={year}
+                onChange={handleSliderChange}
+                />
+                <p>{year}</p>
+              </div>
+          
           </div>
 
 
