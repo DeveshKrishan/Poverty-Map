@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MapChart from './MapChart';
+import Select from 'react-select'
 
 export default function Main() {
 
@@ -15,7 +16,15 @@ export default function Main() {
   ];
 
   const [year, setYear] = useState(1997); // default parameter
-  const [selectedCounty, setSelectedCounty] = useState(null);
+  
+  const SelectTopic = ({ topic, onChange }) => (
+    <Select
+      options={options}
+      value={options.find(option => option.value === topic)}
+      onChange={onChange}
+    />
+  );
+  
 
   const handleSliderChange = (event) => {
     setYear(parseInt(event.target.value));
@@ -23,10 +32,6 @@ export default function Main() {
 
   const [topic, setTopic] = useState("povRate");
   
-  const handleTopicChange = (e) => {
-    setTopic(e.target.value);
-  };
-
 
   return (
     <div className="main">
@@ -62,10 +67,7 @@ export default function Main() {
           
             <div className='param-2'>
                 <label for="language">Select type of data:</label>
-                  <select name="language" id="language" onChange={handleTopicChange}>
-                    <option value="povRate" >Poverty Rate</option>
-                    <option value="annIncome">Annual Income</option>
-                  </select>
+                <SelectTopic topic={topic} onChange={selectedOption => setTopic(selectedOption.value)} />
               </div>
 
               <div className="param-1">
