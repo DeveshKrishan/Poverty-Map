@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import MapChart from './MapChart';
-import Select from 'react-select'
-
+import Select from 'react-select';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 export default function Main() {
 
   const options = [
@@ -32,6 +33,12 @@ export default function Main() {
 
   const [topic, setTopic] = useState("povRate");
   
+
+  function valuetext(value) {
+    return `${value}°C`;
+  }
+
+
 
   return (
     <div className="main">
@@ -72,13 +79,36 @@ export default function Main() {
 
               <div className="param-1">
                 <p>Select Year:</p>
-                <input
+                {/* <input
                 type="range"
                 min="1997"
                 max="2023"
                 value={year}
                 onChange={handleSliderChange}
-                />
+                /> */}
+                <Box sx={{ width: 300 }}>
+                  <Slider
+                    // aria-label="Temperature"
+                    // defaultValue={1997}
+                    // getAriaValueText={valuetext}
+                    // valueLabelDisplay="auto"
+                    // step={1000}
+                    // marks={true}
+                    // min={1997}
+                    // max={2020}
+                    // onChange={handleSliderChange}
+
+                    value={year}
+                    onChange={handleSliderChange}
+                    min={1997}
+                    max={2020}
+                    step={1}
+                    marks={true}
+                    valueLabelDisplay='auto'
+                    aria-labelledby="year-slider"
+                  />
+                </Box>
+
                 <p>{year}</p>
               </div>
           
