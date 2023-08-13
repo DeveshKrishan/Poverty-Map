@@ -15,7 +15,8 @@ export default function Main() {
   ];
 
   const [year, setYear] = useState(1997); // default parameter
-  
+  const [selectedCounty, setSelectedCounty] = useState(null);
+
   const handleSliderChange = (event) => {
     setYear(parseInt(event.target.value));
   };

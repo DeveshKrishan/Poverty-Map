@@ -90,9 +90,8 @@
     padding: var(--primray-padding);
     display: flex;
     font-size: 1.5rem;
-    align-items: center;
-    align-content: space-around;
-    /* gap: 8rem;  */
+    justify-content: center; /* Center horizontally */
+    gap: 20rem; 
   }
 
 

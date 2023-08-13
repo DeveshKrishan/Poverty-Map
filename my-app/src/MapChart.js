@@ -14,8 +14,7 @@ const MapChart = (props) => {
   const [data, setData] = useState([]);
   const year = parseInt(props.year);
   const topic = props.topic;
-
-  const geoNameMapping = {}; // Mapping object to associate GeoJSON feature names with data
+  const [selectedCounty, setSelectedCounty] = useState(null);
 
   useEffect(() => {
     // Load data from CSV
@@ -24,7 +23,6 @@ const MapChart = (props) => {
         .filter(item => parseInt(item.Year) === year)
         .map(item => {
           const name = item.County;
-          geoNameMapping[name] = item.Id;
           return {
             name,
             County: item.County,
@@ -50,6 +48,14 @@ const MapChart = (props) => {
       "#005E84"
     ]);
 
+  useEffect(() => {
+    console.log(selectedCounty);
+  }, [selectedCounty]);
+
+  const handleCountyClick = (geo) => {
+    setSelectedCounty(geo.properties.name);
+  };
+
   return (
     <>
       <ComposableMap projection="geoAlbersUsa">
@@ -62,6 +68,7 @@ const MapChart = (props) => {
                   key={geo.rsmKey}
                   geography={geo}
                   fill={cur ? colorScale(cur.Topic) : "#EEE"}
+                  onClick={() => handleCountyClick(geo)} // Handle county click
                 />
               );
             })
