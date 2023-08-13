@@ -90,8 +90,7 @@ export default function Main() {
         <div class="grid-item"></div>
 
         {/* Footer Locations */}
-        <div class="grid-item">Grid 7</div>
-        <div class="grid-item">Grid 8</div>
+        <div class="grid-item">Footer</div>
       </div>
 
 
