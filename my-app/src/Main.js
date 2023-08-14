@@ -4,7 +4,7 @@ import Select from 'react-select';
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
 import MapInfo from './MapInfo';
-import { LineChart, Line } from 'recharts';
+import Legend from './Legend';
 
 export default function Main() {
 
@@ -145,7 +145,6 @@ export default function Main() {
   // };
 
   const [topic, setTopic] = useState("povRate");
-  
   return (
     <div className="main">
       <div class="grid-container">
@@ -164,7 +163,13 @@ export default function Main() {
         {/* MAP */}
         <div class="grid-item long">
                 <div className="map">
-                  <div className="Legend"> This is a Legend</div>
+                  <div className="Legend">
+                    <Legend />
+                    <div className="legend-title">
+                      <p>Lowest</p>
+                      <p>Highest</p>
+                    </div>
+                  </div>
                   <MapChart year={year} topic={topic} onCountySelect={(selectedCountyName, selectedCountyId) => {
                       setSelectedCountyName(selectedCountyName);
                       setSelectedCountyId(selectedCountyId);
@@ -176,7 +181,7 @@ export default function Main() {
         {/* MAP INFO */}
         <div class="grid-item long">
           <div className="map-info">
-            <MapInfo countyName={selectedCountyName} countyId={selectedCountyId} mapYear={year} />
+            <MapInfo countyName={ year === "1999" ? "N/A" : selectedCountyName} countyId={selectedCountyId} mapYear={year} />
           </div>
         </div>
         {/* Map parameters */}
@@ -201,7 +206,9 @@ export default function Main() {
         <div class="grid-item"></div>
 
         {/* Footer Locations */}
-        <div class="grid-item">Footer</div>
+        <div class="grid-item">
+          <p className="footer"> &copy; 2023 Devesh Krishan, Sarvesh Krishan, Jaskirt Kaler. All rights reserved.</p> 
+        </div>
       </div>
 
 
