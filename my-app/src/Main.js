@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import MapChart from './MapChart';
 import Select from 'react-select';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+// import Box from '@mui/material/Box';
+// import Slider from '@mui/material/Slider';
+import MapInfo from './MapInfo';
+
 export default function Main() {
 
   const options = [
@@ -17,7 +19,8 @@ export default function Main() {
   ];
 
   const [year, setYear] = useState(1997); // default parameter
-  
+  const [selectedCountyName, setSelectedCountyName] = useState(null); // State to store selected county name
+  const [selectedCountyId, setSelectedCountyId] = useState(null); // State to store selected county ID
   
   const SelectTopic = ({ topic, onChange }) => (
     <Select
@@ -134,17 +137,14 @@ export default function Main() {
     />
   );
 
-  const handleSliderChange = (event) => {
-    setYear(parseInt(event.target.value));
-    // setTemp(newValue);
+  // const handleSliderChange = (event) => {
+  //   setYear(parseInt(event.target.value));
+  //   // setTemp(newValue);
 
-  };
+  // };
 
   const [topic, setTopic] = useState("povRate");
   
-
-
-
   return (
     <div className="main">
       <div class="grid-container">
@@ -162,18 +162,20 @@ export default function Main() {
 
         {/* MAP */}
         <div class="grid-item long">
-          <div className="map">
-            <div className="Legend"> This is a Legend</div>
-            <MapChart year={year} topic={topic} />
-          </div>
-        </div>
+                <div className="map">
+                  <div className="Legend"> This is a Legend</div>
+                  <MapChart year={year} topic={topic} onCountySelect={(selectedCountyName, selectedCountyId) => {
+                      setSelectedCountyName(selectedCountyName);
+                      setSelectedCountyId(selectedCountyId);
+                    }}
+                  />
+                </div>
+              </div>
+
         {/* MAP INFO */}
         <div class="grid-item long">
           <div className="map-info">
-            <p className="map-info-part">Poverty Rate:</p>
-            <p className="map-info-part">Annual Income:</p>
-            <p className="map-info-part">Population Count:</p>
-            {/* Add line graph here  */}
+            <MapInfo countyName={selectedCountyName} countyId={selectedCountyId} mapYear={year} />
           </div>
         </div>
         {/* Map parameters */}
@@ -191,11 +193,9 @@ export default function Main() {
                 {selectYear({ selectYYear: year, onChange: selectedOption => setYear(selectedOption.value) })}
               </div>
 
-          
+
           </div>
 
-
-          
         </div>
         <div class="grid-item"></div>
 

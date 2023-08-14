@@ -63,8 +63,11 @@ const MapChart = (props) => {
   }, [selectedCounty]);
 
   const handleCountyClick = (geo) => {
-    setSelectedCounty(geo.properties.name);
+    const selectedCountyName = geo.properties.name;
+    const selectedCountyId = geo.id; // Assuming geo.id holds the county ID
+    props.onCountySelect(selectedCountyName, selectedCountyId); // Pass the selected county name and ID to the parent component
   };
+
 
   return (
     <>
