@@ -3,6 +3,7 @@ import MapChart from './MapChart';
 import Select from 'react-select';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import { LineChart, Line } from 'recharts';
 export default function Main() {
 
   const options = [
@@ -134,11 +135,11 @@ export default function Main() {
     />
   );
 
-  const handleSliderChange = (event) => {
-    setYear(parseInt(event.target.value));
-    // setTemp(newValue);
+  // const handleSliderChange = (event) => {
+  //   setYear(parseInt(event.target.value));
+  //   // setTemp(newValue);
 
-  };
+  // };
 
   const [topic, setTopic] = useState("povRate");
   
