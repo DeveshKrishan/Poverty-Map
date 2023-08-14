@@ -1,75 +1,92 @@
-import React from "react";
-import { geoCentroid } from "d3-geo";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Marker,
-  Annotation
-} from "react-simple-maps";
+import React, { useState, useEffect } from "react";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { scaleQuantile } from "d3-scale";
+import { csv } from "d3-fetch";
 
-import allStates from "./data/allstates.json";
+const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+const topicConversion = new Map();
+topicConversion.set("povRate", "Rate Estimate");
+topicConversion.set("annIncome", "Median Household Income");
+topicConversion.set("Population", "Count Estimate");
 
-const offsets = {
-  VT: [50, -8],
-  NH: [34, 2],
-  MA: [30, -1],
-  RI: [28, 2],
-  CT: [35, 10],
-  NJ: [34, 1],
-  DE: [33, 0],
-  MD: [47, 10],
-  DC: [49, 21]
-};
+const MapChart = (props) => {
+  const [data, setData] = useState([]);
+  const year = parseInt(props.year);
+  const topic = props.topic;
+  const [selectedCounty, setSelectedCounty] = useState(null);
 
-const MapChart = () => {
+  useEffect(() => {
+    // Load data from CSV
+    csv("/data.csv").then(csvData => {
+      const filteredData = csvData
+        .filter(item => parseInt(item.Year) === year)
+        .map(item => {
+          const name = item.County;
+          return {
+            name,
+            County: item.County,
+            Year: parseInt(item.Year),
+            Topic: parseFloat(item[topicConversion.get(topic)])
+          };
+        });
+      setData(filteredData);
+    });
+  }, [year, topic]);
+
+  const colorScale = scaleQuantile()
+    .domain(data.map(d => d.Topic))
+    .range([
+      "#CFECF8", 
+      "#B3E9FF",
+      "#82DBFF",
+      "#69D4FF",
+      "#2EADE0",
+      "#1896C8",
+      "#0784B6",
+      "#0775A1",
+      "#005E84"
+    ]);
+
+    // "#CFECF8", DEFAULT Blue colors
+    // "#B3E9FF",
+    // "#82DBFF",
+    // "#69D4FF",
+    // "#2EADE0",
+    // "#1896C8",
+    // "#0784B6",
+    // "#0775A1",
+    // "#005E84"
+
+
+  useEffect(() => {
+    console.log(selectedCounty);
+  }, [selectedCounty]);
+
+  const handleCountyClick = (geo) => {
+    setSelectedCounty(geo.properties.name);
+  };
+
   return (
-    <ComposableMap projection="geoAlbersUsa">
-      <Geographies geography={geoUrl}>
-        {({ geographies }) => (
-          <>
-            {geographies.map(geo => (
-              <Geography
-                key={geo.rsmKey}
-                stroke="#FFF"
-                geography={geo}
-                fill="#DDD"
-              />
-            ))}
-            {geographies.map(geo => {
-              const centroid = geoCentroid(geo);
-              const cur = allStates.find(s => s.val === geo.id);
+    <>
+      <ComposableMap projection="geoAlbersUsa">
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map(geo => {
+              const cur = data.find(s => s.name.replace(" County", "") === geo.properties.name);
               return (
-                <g key={geo.rsmKey + "-name"}>
-                  {cur &&
-                    centroid[0] > -160 &&
-                    centroid[0] < -67 &&
-                    (Object.keys(offsets).indexOf(cur.id) === -1 ? (
-                      <Marker coordinates={centroid}>
-                        <text y="2" fontSize={14} textAnchor="middle">
-                          {cur.id}
-                        </text>
-                      </Marker>
-                    ) : (
-                      <Annotation
-                        subject={centroid}
-                        dx={offsets[cur.id][0]}
-                        dy={offsets[cur.id][1]}
-                      >
-                        <text x={4} fontSize={14} alignmentBaseline="middle">
-                          {cur.id}
-                        </text>
-                      </Annotation>
-                    ))}
-                </g>
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill={cur ? colorScale(cur.Topic) : "#b1b1b1"}
+                  onClick={() => handleCountyClick(geo)} // Handle county click
+                />
               );
-            })}
-          </>
-        )}
-      </Geographies>
-    </ComposableMap>
+            })
+          }
+        </Geographies>
+      </ComposableMap>
+    </>
   );
 };
 
