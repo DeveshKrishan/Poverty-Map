@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapChart from './MapChart';
 import Select from 'react-select';
 // import Box from '@mui/material/Box';
@@ -137,6 +137,14 @@ export default function Main() {
       onChange={onChange}
     />
   );
+
+  useEffect(() => {
+    if(year === "1999"){
+      alert("There is no Data for 1999");
+    }
+  },[year]);
+
+
 
   // const handleSliderChange = (event) => {
   //   setYear(parseInt(event.target.value));
