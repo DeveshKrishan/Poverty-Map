@@ -1,0 +1,226 @@
+{
+    "04": {
+        "name": "Arizona",
+        "short": "AZ"
+    },
+    "22": {
+        "name": "Louisiana",
+        "short": "LA"
+    },
+    "16": {
+        "name": "Idaho",
+        "short": "ID"
+    },
+    "27": {
+        "name": "Minnesota",
+        "short": "MN"
+    },
+    "38": {
+        "name": "North Dakota",
+        "short": "ND"
+    },
+    "46": {
+        "name": "South Dakota",
+        "short": "SD"
+    },
+    "36": {
+        "name": "New York",
+        "short": "NY"
+    },
+    "02": {
+        "name": "Alaska",
+        "short": "AK"
+    },
+    "13": {
+        "name": "Georgia",
+        "short": "GA"
+    },
+    "18": {
+        "name": "Indiana",
+        "short": "IN"
+    },
+    "26": {
+        "name": "Michigan",
+        "short": "MI"
+    },
+    "28": {
+        "name": "Mississippi",
+        "short": "MS"
+    },
+    "39": {
+        "name": "Ohio",
+        "short": "OH"
+    },
+    "48": {
+        "name": "Texas",
+        "short": "TX"
+    },
+    "72": {
+        "name": "Puerto Rico",
+        "short": "PR"
+    },
+    "31": {
+        "name": "Nebraska",
+        "short": "NE"
+    },
+    "08": {
+        "name": "Colorado",
+        "short": "CO"
+    },
+    "24": {
+        "name": "Maryland",
+        "short": "MD"
+    },
+    "20": {
+        "name": "Kansas",
+        "short": "KS"
+    },
+    "17": {
+        "name": "Illinois",
+        "short": "IL"
+    },
+    "55": {
+        "name": "Wisconsin",
+        "short": "WI"
+    },
+    "06": {
+        "name": "California",
+        "short": "CA"
+    },
+    "19": {
+        "name": "Iowa",
+        "short": "IA"
+    },
+    "42": {
+        "name": "Pennsylvania",
+        "short": "PA"
+    },
+    "30": {
+        "name": "Montana",
+        "short": "MT"
+    },
+    "29": {
+        "name": "Missouri",
+        "short": "MO"
+    },
+    "12": {
+        "name": "Florida",
+        "short": "FL"
+    },
+    "21": {
+        "name": "Kentucky",
+        "short": "KY"
+    },
+    "23": {
+        "name": "Maine",
+        "short": "ME"
+    },
+    "49": {
+        "name": "Utah",
+        "short": "UT"
+    },
+    "40": {
+        "name": "Oklahoma",
+        "short": "OK"
+    },
+    "47": {
+        "name": "Tennessee",
+        "short": "TN"
+    },
+    "41": {
+        "name": "Oregon",
+        "short": "OR"
+    },
+    "54": {
+        "name": "West Virginia",
+        "short": "WV"
+    },
+    "05": {
+        "name": "Arkansas",
+        "short": "AR"
+    },
+    "53": {
+        "name": "Washington",
+        "short": "WA"
+    },
+    "37": {
+        "name": "North Carolina",
+        "short": "NC"
+    },
+    "51": {
+        "name": "Virginia",
+        "short": "VA"
+    },
+    "56": {
+        "name": "Wyoming",
+        "short": "WY"
+    },
+    "01": {
+        "name": "Alabama",
+        "short": "AL"
+    },
+    "45": {
+        "name": "South Carolina",
+        "short": "SC"
+    },
+    "35": {
+        "name": "New Mexico",
+        "short": "NM"
+    },
+    "33": {
+        "name": "New Hampshire",
+        "short": "NH"
+    },
+    "60": {
+        "name": "American Samoa",
+        "short": "AS"
+    },
+    "50": {
+        "name": "Vermont",
+        "short": "VT"
+    },
+    "32": {
+        "name": "Nevada",
+        "short": "NV"
+    },
+    "15": {
+        "name": "Hawaii",
+        "short": "HI"
+    },
+    "25": {
+        "name": "Massachusetts",
+        "short": "MA"
+    },
+    "78": {
+        "name": "United States Virgin Islands",
+        "short": "N/A"
+    },
+    "44": {
+        "name": "Rhode Island",
+        "short": "RI"
+    },
+    "34": {
+        "name": "New Jersey",
+        "short": "NJ"
+    },
+    "10": {
+        "name": "Delaware",
+        "short": "DE"
+    },
+    "09": {
+        "name": "Connecticut",
+        "short": "CT"
+    },
+    "69": {
+        "name": "Commonwealth of the Northern Mariana Islands",
+        "short": "N/A"
+    },
+    "66": {
+        "name": "Guam",
+        "short": "GU"
+    },
+    "11": {
+        "name": "District of Columbia",
+        "short": "DC"
+    }
+}
