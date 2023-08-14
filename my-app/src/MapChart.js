@@ -37,7 +37,7 @@ const MapChart = (props) => {
   const colorScale = scaleQuantile()
     .domain(data.map(d => d.Topic))
     .range([
-      "#CFECF8",
+      "#CFECF8", 
       "#B3E9FF",
       "#82DBFF",
       "#69D4FF",
@@ -47,6 +47,17 @@ const MapChart = (props) => {
       "#0775A1",
       "#005E84"
     ]);
+
+    // "#CFECF8", DEFAULT Blue colors
+    // "#B3E9FF",
+    // "#82DBFF",
+    // "#69D4FF",
+    // "#2EADE0",
+    // "#1896C8",
+    // "#0784B6",
+    // "#0775A1",
+    // "#005E84"
+
 
   useEffect(() => {
     console.log(selectedCounty);
@@ -67,7 +78,7 @@ const MapChart = (props) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={cur ? colorScale(cur.Topic) : "#EEE"}
+                  fill={cur ? colorScale(cur.Topic) : "#b1b1b1"}
                   onClick={() => handleCountyClick(geo)} // Handle county click
                 />
               );
