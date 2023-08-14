@@ -117,8 +117,9 @@
   }
 
   .Legend{
-    z-index: 0.5rem;
+    /* z-index: 0.5rem; */
     background-color: red;
     width: 40%;
     height: 10%;
+    position: absolute;
   }
