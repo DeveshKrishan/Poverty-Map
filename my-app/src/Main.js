@@ -4,6 +4,7 @@ import Select from 'react-select';
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
 import MapInfo from './MapInfo';
+import { LineChart, Line } from 'recharts';
 
 export default function Main() {
 
