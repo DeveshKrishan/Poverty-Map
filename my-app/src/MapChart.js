@@ -22,9 +22,8 @@ const MapChart = (props) => {
       const filteredData = csvData
         .filter(item => parseInt(item.Year) === year)
         .map(item => {
-          const name = item.County;
           return {
-            name,
+            Id: item.Id,
             County: item.County,
             Year: parseInt(item.Year),
             Topic: parseFloat(item[topicConversion.get(topic)])
@@ -73,7 +72,7 @@ const MapChart = (props) => {
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map(geo => {
-              const cur = data.find(s => s.name.replace(" County", "") === geo.properties.name);
+              const cur = data.find(s => s.Id === geo.id);
               return (
                 <Geography
                   key={geo.rsmKey}
