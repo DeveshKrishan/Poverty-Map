@@ -144,7 +144,7 @@ export default function Main() {
 
   useEffect(() => {
     if(year === "1999"){
-      alert("There is no Data for 1999");
+      alert("There is no data available for 1999.");
     }
   },[year]);
 
@@ -156,14 +156,14 @@ export default function Main() {
   let minimumValue = "";
   let maximumValue = "";
   try{
-    const minMaxTopic = (topic == "povRate") ? "rate" : "income";
+    const minMaxTopic = (topic === "povRate") ? "rate" : "income";
 
     const minMaxArray = minMaxJSON[year][minMaxTopic][0];
     minimumValue = minMaxArray[0].toLocaleString("en-US");
     maximumValue = minMaxArray[1].toLocaleString("en-US");
 
-    minimumValue = (topic == "povRate") ? `${minimumValue}%` : `$${minimumValue}`;
-    maximumValue = (topic == "povRate") ? `${maximumValue}%` : `$${maximumValue}`;
+    minimumValue = (topic === "povRate") ? `${minimumValue}%` : `$${minimumValue}`;
+    maximumValue = (topic === "povRate") ? `${maximumValue}%` : `$${maximumValue}`;
   }
   catch(e){
     console.error(`Something went wrong with getting the min and max values of the legend: ${e}`);

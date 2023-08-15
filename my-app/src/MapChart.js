@@ -14,7 +14,6 @@ const MapChart = (props) => {
   const [data, setData] = useState([]);
   const year = parseInt(props.year);
   const topic = props.topic;
-  const [selectedCounty, setSelectedCounty] = useState(null);
 
   useEffect(() => {
     // Load data from CSV
@@ -58,10 +57,6 @@ const MapChart = (props) => {
     // "#005E84"
 
 
-  useEffect(() => {
-    console.log(selectedCounty);
-  }, [selectedCounty]);
-
   const handleCountyClick = (geo) => {
     const selectedCountyName = geo.properties.name;
     const selectedCountyId = geo.id; // Assuming geo.id holds the county ID
@@ -82,6 +77,17 @@ const MapChart = (props) => {
                   geography={geo}
                   fill={cur ? colorScale(cur.Topic) : "#b1b1b1"}
                   onClick={() => handleCountyClick(geo)} // Handle county click
+                  style={{
+                    default: {
+                      cursor: "pointer", 
+                    },
+                    hover: {
+                      cursor: "pointer", 
+                    },
+                    pressed: {
+                      cursor: "pointer", 
+                    },
+                  }}
                 />
               );
             })
