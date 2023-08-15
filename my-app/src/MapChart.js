@@ -46,17 +46,6 @@ const MapChart = (props) => {
       "#005E84"
     ]);
 
-    // "#CFECF8", DEFAULT Blue colors
-    // "#B3E9FF",
-    // "#82DBFF",
-    // "#69D4FF",
-    // "#2EADE0",
-    // "#1896C8",
-    // "#0784B6",
-    // "#0775A1",
-    // "#005E84"
-
-
   const handleCountyClick = (geo) => {
     const selectedCountyName = geo.properties.name;
     const selectedCountyId = geo.id; // Assuming geo.id holds the county ID

@@ -148,11 +148,6 @@ export default function Main() {
     }
   },[year]);
 
-  // const handleSliderChange = (event) => {
-  //   setYear(parseInt(event.target.value));
-  //   // setTemp(newValue);
-
-  // };
   let minimumValue = "";
   let maximumValue = "";
   try{
@@ -188,8 +183,6 @@ export default function Main() {
     const funFact = funFactsArr[(Math.floor(Math.random() * funFactsArr.length))];
     return funFact
   }
-
-
 
   // Modal
 
@@ -283,17 +276,23 @@ export default function Main() {
               </button>
             </div>
             {/* insert About info */}
-            <p className="modal-content-text">
-                this is text
-            </p>
+            <div className='aboutText'>
+              <p className="modal-content-text">
+                Where is the data from? The data is publicly available from the <a href='https://www.census.gov/data/developers/data-sets/Poverty-Statistics.html ' target='_blank'>United States Census Bureau</a>.  
+              </p>
+              <p className="modal-content-text">
+                How did you build this? We built this using React, Node.js, Python, and Git. Some libaries we use are React Simple Maps for the map, React Select for the map parameters, and Recharts for the line charts. Python is used to create specific JSON files to allow queries to be much faster than manually searching through a 72,000 line CSV. 
+              </p>
+              <p className="modal-content-text">
+                Any future updates? Currently, there is no initiative to continue to develop this project. We do have some features in mind such as predicting the poverty and annual incomes of every county, allow users to search for specific counties, and add more information for each county.
+              </p>
+              <p className="modal-content-text">
+                Who built this? <a href='https://github.com/DeveshKrishan' target='_blank'>Devesh Krishan </a>, <a href='https://github.com/sarvesh-krishan' target='_blank'>Sarvesh Krishan</a>, <a href='https://github.com/JaskirtKaler' target='_blank'>Jaskirt Kaler </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      
-      
-      
-
-
     </div>
   )
 }
