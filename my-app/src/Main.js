@@ -189,6 +189,16 @@ export default function Main() {
     return funFact
   }
 
+
+
+  // Modal
+
+  const [modalVisible, setModalVisble] = useState(false);
+
+  const handleModalToggle = () =>{
+    setModalVisble(!modalVisible);
+  }
+
   return (
     <div className="main">
       <div class="grid-container">
@@ -200,7 +210,7 @@ export default function Main() {
         <div class="grid-item">
           <div className="header-2">
             <a href="#" className="links-huh">Home</a>
-            <a href="#" className="links-huh">About</a>
+            <a href="#" className="links-huh" onClick={handleModalToggle}>About</a>
           </div>
         </div>
 
@@ -258,6 +268,30 @@ export default function Main() {
           <p className="footer"> &copy; 2023 Devesh Krishan, Sarvesh Krishan, Jaskirt Kaler. All rights reserved.</p> 
         </div>
       </div>
+
+      
+      
+      {/* Modal Overlay */}
+      <div className={`modal-overlay ${modalVisible ? 'active' : ''}`} onClick={handleModalToggle}>
+        {/* Modal Container */}
+        <div className={`modal ${modalVisible ? 'active' : ''}`}>
+          <div className="modal-content">
+            <div className="module">
+              <h1>About Us</h1>
+              <button className="modal-close-button" onClick={handleModalToggle}>
+                <span className="close-icon">X</span>
+              </button>
+            </div>
+            {/* insert About info */}
+            <p className="modal-content-text">
+                this is text
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      
+      
 
 
     </div>

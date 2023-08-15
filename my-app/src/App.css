@@ -167,3 +167,68 @@
     margin: 0;
     font-size: 2rem;
   }
+
+/*MODAL CSS*/
+  /* Add styles for the modal overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Add styles for the modal container */
+.modal {
+  display: none;
+  background-color: white;
+  width: 60%;
+  height: 60%;
+  padding: 1rem;
+  border-radius: var(--primray-border-radius);
+}
+
+/* Show the modal when it's active */
+.modal-overlay.active,
+.modal.active {
+  display: flex;
+}
+
+.modal-content{
+  height: 100%;
+  width: 100%;
+  padding: var(--primray-padding);
+}
+.module{
+  display: flex;
+  justify-content: space-between;
+}
+.module h1{
+  margin: 0;
+  padding: 0;
+  font-size: 3rem;
+}
+
+.modal-close-button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.close-icon{
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: red;
+}
+
+.modal-content-text{
+  margin: 0;
+  padding: 0;
+  /* height: 90%; */
+}
