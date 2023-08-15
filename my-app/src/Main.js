@@ -192,6 +192,13 @@ export default function Main() {
     setModalVisble(!modalVisible);
   }
 
+  // when clicked only on overlay
+  const handleOverlayClick = (event) =>{
+    if(event.target.classList.contains("modal-overlay")){
+      handleModalToggle();
+    }
+  }
+
   return (
     <div className="main">
       <div class="grid-container">
@@ -265,7 +272,7 @@ export default function Main() {
       
       
       {/* Modal Overlay */}
-      <div className={`modal-overlay ${modalVisible ? 'active' : ''}`} onClick={handleModalToggle}>
+      <div className={`modal-overlay ${modalVisible ? 'active' : ''}`} onClick={handleOverlayClick}>
         {/* Modal Container */}
         <div className={`modal ${modalVisible ? 'active' : ''}`}>
           <div className="modal-content">

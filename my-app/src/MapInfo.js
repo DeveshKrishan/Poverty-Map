@@ -115,7 +115,7 @@ function MapInfo(props) {
           </LineChart>
         </ResponsiveContainer>
 
-        <p className="map-info-part">Poor People: { year === "1999" ? "N/A" : population}</p>
+        <p className="map-info-part">People in Poverty: { year === "1999" ? "N/A" : population}</p>
         {/* Add line graph here  */}
         {/* margin={{ top: 5, right: 20, bottom: 5, left: 15 }} */}
 
@@ -126,7 +126,7 @@ function MapInfo(props) {
             left: 0,
             bottom: 0
           }} data={countData} >
-            <Line type="monotone" dataKey="Count" name="Estimate People in Poverty" stroke="#005E84" />
+            <Line type="monotone" dataKey="Count" name="People in Poverty" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
             <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
             <YAxis dataKey="Count" domain={[0, maxYValueCount]} label={{ value: 'Count', position: 'insideLeft', angle: -90 }} />
