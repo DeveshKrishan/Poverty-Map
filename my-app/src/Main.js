@@ -5,6 +5,7 @@ import Select from 'react-select';
 // import Slider from '@mui/material/Slider';
 import MapInfo from './MapInfo';
 import Legend from './Legend';
+import minMaxJSON from "./data/min_max.json"
 
 export default function Main() {
 
@@ -22,7 +23,8 @@ export default function Main() {
   const [year, setYear] = useState(1997); // default parameter
   const [selectedCountyName, setSelectedCountyName] = useState(null); // State to store selected county name
   const [selectedCountyId, setSelectedCountyId] = useState(null); // State to store selected county ID
-  
+  const [topic, setTopic] = useState("povRate");
+
   const SelectTopic = ({ topic, onChange }) => (
     <Select
       options={options}
@@ -144,15 +146,27 @@ export default function Main() {
     }
   },[year]);
 
-
-
   // const handleSliderChange = (event) => {
   //   setYear(parseInt(event.target.value));
   //   // setTemp(newValue);
 
   // };
+  let minimumValue = "";
+  let maximumValue = "";
+  try{
+    const minMaxTopic = (topic == "povRate") ? "rate" : "income";
 
-  const [topic, setTopic] = useState("povRate");
+    const minMaxArray = minMaxJSON[year][minMaxTopic][0];
+    minimumValue = minMaxArray[0].toLocaleString("en-US");
+    maximumValue = minMaxArray[1].toLocaleString("en-US");
+
+    minimumValue = (topic == "povRate") ? `${minimumValue}%` : `$${minimumValue}`;
+    maximumValue = (topic == "povRate") ? `${maximumValue}%` : `$${maximumValue}`;
+  }
+  catch(e){
+    console.error(`Something went wrong with getting the min and max values of the legend: ${e}`);
+  }
+
   return (
     <div className="main">
       <div class="grid-container">
@@ -174,8 +188,8 @@ export default function Main() {
                   <div className="Legend">
                     <Legend />
                     <div className="legend-title">
-                      <p>Lowest</p>
-                      <p>Highest</p>
+                      <p>{minimumValue}</p>
+                      <p>{maximumValue}</p>
                     </div>
                   </div>
                   <MapChart year={year} topic={topic} onCountySelect={(selectedCountyName, selectedCountyId) => {
