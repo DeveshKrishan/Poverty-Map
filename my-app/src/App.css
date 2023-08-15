@@ -111,7 +111,6 @@
     box-shadow: var(--primray-box-shadow);
   }
 
-
   .param-2{
     display: flex;
     gap: 1rem;
@@ -153,6 +152,15 @@
   .legend-title p{
     margin: 0.2rem;
     font-size: 1rem
+  }
+
+  .fun-facts{
+    height: 100%;
+    width: 100%;
+    border-radius: var(--primray-border-radius);
+    padding: var(--primray-padding);
+    box-shadow: var(--primray-box-shadow);
+    font-size: 1.5rem;
   }
 
   .footer{

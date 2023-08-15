@@ -5,7 +5,8 @@ import Select from 'react-select';
 // import Slider from '@mui/material/Slider';
 import MapInfo from './MapInfo';
 import Legend from './Legend';
-import minMaxJSON from "./data/min_max.json"
+import minMaxJSON from "./data/min_max.json";
+import funFactsJSON from "./data/fun_facts.json";
 
 export default function Main() {
 
@@ -24,6 +25,7 @@ export default function Main() {
   const [selectedCountyName, setSelectedCountyName] = useState(null); // State to store selected county name
   const [selectedCountyId, setSelectedCountyId] = useState(null); // State to store selected county ID
   const [topic, setTopic] = useState("povRate");
+  const [funFact, setFunFact] = useState(funFactsJSON['facts'][(Math.floor(Math.random() * funFactsJSON['facts'].length))]);
 
   const SelectTopic = ({ topic, onChange }) => (
     <Select
@@ -167,6 +169,26 @@ export default function Main() {
     console.error(`Something went wrong with getting the min and max values of the legend: ${e}`);
   }
 
+  useEffect(() => {
+    const funFactInterval = setInterval(() => {
+      // Generate a new random fun fact here
+      const newFunFact = generateRandomFunFact();
+      setFunFact(newFunFact);
+    }, 6000); // 6000 milliseconds = 6 seconds
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => {
+      clearInterval(funFactInterval);
+    };
+  }, []);
+
+
+  function generateRandomFunFact(){
+    const funFactsArr = funFactsJSON['facts'];
+    const funFact = funFactsArr[(Math.floor(Math.random() * funFactsArr.length))];
+    return funFact
+  }
+
   return (
     <div className="main">
       <div class="grid-container">
@@ -225,8 +247,12 @@ export default function Main() {
           </div>
 
         </div>
-        <div class="grid-item"></div>
-
+        <div className="grid-item">
+          <div className='fun-facts'>
+            <p>Fun fact: {funFact} </p>
+          </div>
+        </div>
+          
         {/* Footer Locations */}
         <div class="grid-item">
           <p className="footer"> &copy; 2023 Devesh Krishan, Sarvesh Krishan, Jaskirt Kaler. All rights reserved.</p> 
