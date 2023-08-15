@@ -80,7 +80,6 @@
   .map-info{
     height: 100%;
     width: 100%;
-    /* background-color: rgb(239, 239, 239); */
     border-radius: var(--primray-border-radius);
     padding: var(--primray-padding);
     box-shadow: var(--primray-box-shadow);
@@ -96,6 +95,7 @@
   .map-info-part p{
     margin: 0;
   }
+
 
 
   .map-parameters{
