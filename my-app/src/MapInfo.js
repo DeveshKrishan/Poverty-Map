@@ -62,6 +62,7 @@ function MapInfo(props) {
     const maxYValueIncome = Math.max(...incomeData.map(item => item.Income)) + 1000; // Adding some buffer
     const maxYValueCount = Math.max(...countData.map(item => item.Count)) + 300; // Adding some buffer
     const chartHeight = "25%";
+    const chartWidth = "100%";
     return (
       <>
         <p className="map-info-part">
@@ -78,38 +79,38 @@ function MapInfo(props) {
         {/* <p className="map-info-part">State Name: {stateName}</p> */}
         <p className="map-info-part">Poverty Rate: { year === "1999" ? "N/A" : povertyRate} </p>
 
-        <ResponsiveContainer width={600} height={chartHeight}>
-          <LineChart width={500} height={400} fontSize={"1rem"}     margin={{
+        <ResponsiveContainer width={chartWidth} height={chartHeight}>
+          <LineChart fontSize={"0.8rem"}     margin={{
             top: 0,
-            right: 0,
+            right: 15,
             left: 0,
-            bottom: 15
+            bottom: 0
           }} data={povertyData} >
             <Line type="monotone" dataKey="Poverty" name="Poverty Rate" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
             <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
             <YAxis dataKey="Poverty" domain={[0, maxYValue]} label={{ value: 'Poverty Rate', position: 'insideLeft', angle: -90 }} />
             <Tooltip/>
-            <Legend verticalAlign="top" height={36}/>
+            <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize : 20}}/>
 
           </LineChart>
         </ResponsiveContainer>
 
         <p className="map-info-part">Annual Income: { year === "1999" ? "N/A" : annualIncome}</p>
 
-        <ResponsiveContainer width={600} height={chartHeight}>
-          <LineChart width={500} height={400} fontSize={"1rem"}     margin={{
+        <ResponsiveContainer width={chartWidth} height={chartHeight}>
+          <LineChart fontSize={"0.8rem"}     margin={{
             top: 0,
-            right: 0,
+            right: 15,
             left: 0,
-            bottom: 15
+            bottom: 0
           }} data={incomeData} >
             <Line type="monotone" dataKey="Income" name="Annual Income" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-            <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
+            <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom' , offset: -15 }}/>
             <YAxis dataKey="Income" domain={[0, maxYValueIncome]} label={{ value: 'Annual Income', position: 'insideLeft', angle: -90 }} />
             <Tooltip/>
-            <Legend verticalAlign="top" height={36}/>
+            <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize : 20}}/>
 
           </LineChart>
         </ResponsiveContainer>
@@ -118,19 +119,19 @@ function MapInfo(props) {
         {/* Add line graph here  */}
         {/* margin={{ top: 5, right: 20, bottom: 5, left: 15 }} */}
 
-        <ResponsiveContainer width={600} height={chartHeight}>
-          <LineChart width={500} height={400} fontSize={"1rem"}     margin={{
+        <ResponsiveContainer width={chartWidth} height={chartHeight}>
+          <LineChart fontSize={"0.8rem"}     margin={{
             top: 0,
-            right: 0,
+            right: 15,
             left: 0,
-            bottom: 15
+            bottom: 0
           }} data={countData} >
             <Line type="monotone" dataKey="Count" name="Estimate People in Poverty" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
             <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
             <YAxis dataKey="Count" domain={[0, maxYValueCount]} label={{ value: 'Count', position: 'insideLeft', angle: -90 }} />
             <Tooltip/>
-            <Legend verticalAlign="top" height={36}/>
+            <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize : 20}}/>
 
           </LineChart>
         </ResponsiveContainer>
