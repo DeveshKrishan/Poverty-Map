@@ -173,7 +173,7 @@
 
   .footer{
     margin: 0;
-    font-size: 2rem;
+    font-size: 4vh;
   }
 
 /*MODAL CSS*/
@@ -287,10 +287,10 @@ a{
     font-size: 0.5rem
   }
   .map-info-part{
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .map-info-part p{
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .param-2{
     font-size: 0.8rem;
@@ -300,10 +300,21 @@ a{
     margin-left: 0.3rem;
   }
   .fun-facts p{
-    font-size: 0.8rem;
+    font-size: 0.5rem;
   }
-
+  .footer{
+    font-size: 2vh
+  }
   
 }
 
 /* Larger Screens Layout */
+
+@media (max-width: 1800px) and (min-width: 1000px) {
+  .map-info-part{
+    font-size: 1.7rem;
+  }
+  .fun-facts p{
+    font-size: 0.8rem;
+  }
+}

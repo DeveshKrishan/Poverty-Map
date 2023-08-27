@@ -1,8 +1,10 @@
 import jsonData from "../src/data/county_index.json"
 import stateData from "./data/state_id.json"
+import { useState, useEffect } from "react";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, Label} from 'recharts';
 
 function MapInfo(props) {
+    const [screenSize, setScreenSize] = useState(getCurrentDimension());
     const county = props.countyName;
     const uid = props.countyId;
     const year = props.mapYear;
@@ -12,6 +14,35 @@ function MapInfo(props) {
     let population = "";
     let stateName = "";
     let statePopulation = "";
+    let intervalRange = 0;
+    let chartHeight = "25%";
+    let chartWidth = "100%";
+
+    if (screenSize.width > 1800){
+      intervalRange = 1;
+      chartHeight = "25%";
+      chartWidth = "100%";   
+    }
+    else if (screenSize.width > 1400 ){
+      intervalRange = 3;
+      chartHeight = "20%";
+    }
+    else if (screenSize.width > 1000){
+      intervalRange = 5;
+      chartHeight = "15%";
+    }
+    else if (screenSize.width > 700){
+      intervalRange = 4;
+    }
+    else if (screenSize.width > 300){
+      intervalRange = 6;
+    }
+    else{
+      intervalRange = 1;
+    }
+
+
+
     try{
         povertyRate = `${jsonData[uid][year]['rate_estimate']}%`;
         annualIncome = `$${parseInt(jsonData[uid][year]['median_income']).toLocaleString("en-US")}`;
@@ -58,11 +89,21 @@ function MapInfo(props) {
       console.error(`Error has occured : ${e}`);
     }
     
+    useEffect(() => {
+      const updateDimension = () => {
+        setScreenSize(getCurrentDimension())
+      }
+      window.addEventListener('resize', updateDimension);
+      
+      return(() => {
+          window.removeEventListener('resize', updateDimension);
+      })
+    }, [screenSize])
+
     const maxYValue = Math.max(...povertyData.map(item => item.Poverty)) + 5; // Adding some buffer
     const maxYValueIncome = Math.max(...incomeData.map(item => item.Income)) + 1000; // Adding some buffer
     const maxYValueCount = Math.max(...countData.map(item => item.Count)) + 300; // Adding some buffer
-    const chartHeight = "25%";
-    const chartWidth = "100%";
+
     return (
       <>
         <p className="map-info-part">
@@ -78,7 +119,6 @@ function MapInfo(props) {
 
         {/* <p className="map-info-part">State Name: {stateName}</p> */}
         <p className="map-info-part">Poverty Rate: { year === "1999" ? "N/A" : povertyRate} </p>
-
         <ResponsiveContainer width={chartWidth} height={chartHeight}>
           <LineChart fontSize={"0.8rem"}     margin={{
             top: 0,
@@ -88,7 +128,7 @@ function MapInfo(props) {
           }} data={povertyData} >
             <Line type="monotone" dataKey="Poverty" name="Poverty Rate" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-            <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
+            <XAxis dataKey="year" interval={intervalRange} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
             <YAxis dataKey="Poverty" domain={[0, maxYValue]} label={{ value: 'Poverty Rate', position: 'insideLeft', angle: -90 }} />
             <Tooltip/>
             <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize : 20}}/>
@@ -97,7 +137,6 @@ function MapInfo(props) {
         </ResponsiveContainer>
 
         <p className="map-info-part">Annual Income: { year === "1999" ? "N/A" : annualIncome}</p>
-
         <ResponsiveContainer width={chartWidth} height={chartHeight}>
           <LineChart fontSize={"0.8rem"}     margin={{
             top: 0,
@@ -107,7 +146,7 @@ function MapInfo(props) {
           }} data={incomeData} >
             <Line type="monotone" dataKey="Income" name="Annual Income" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-            <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom' , offset: -15 }}/>
+            <XAxis dataKey="year" interval={intervalRange} label={{ value: 'Year', position: 'insideBottom' , offset: -15 }}/>
             <YAxis dataKey="Income" domain={[0, maxYValueIncome]} label={{ value: 'Annual Income', position: 'insideLeft', angle: -90 }} />
             <Tooltip/>
             <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize : 20}}/>
@@ -128,7 +167,7 @@ function MapInfo(props) {
           }} data={countData} >
             <Line type="monotone" dataKey="Count" name="People in Poverty" stroke="#005E84" />
             <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-            <XAxis dataKey="year" interval={1} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
+            <XAxis dataKey="year" interval={intervalRange} label={{ value: 'Year', position: 'insideBottom', offset: -15 }}/>
             <YAxis dataKey="Count" domain={[0, maxYValueCount]} label={{ value: 'Count', position: 'insideLeft', angle: -90 }} />
             <Tooltip/>
             <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize : 20}}/>
@@ -141,5 +180,14 @@ function MapInfo(props) {
     );
   }
   
-  export default MapInfo;
+function getCurrentDimension(){
+  return {
+      width: window.innerWidth,
+      height: window.innerHeight
+  }
+}
+
+
+
+export default MapInfo;
   
